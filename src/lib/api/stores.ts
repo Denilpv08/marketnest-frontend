@@ -58,6 +58,11 @@ export const storesApi = {
     return response.data;
   },
 
+  getPublic: async (): Promise<Store[]> => {
+    const response = await api.get("/api/stores/public");
+    return response.data;
+  },
+
   changeStatus: async (storeId: number, status: string): Promise<Store> => {
     const response = await api.patch(`/api/admin/stores/${storeId}/status`, {
       status,
