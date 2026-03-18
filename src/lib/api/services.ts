@@ -33,6 +33,21 @@ export const servicesApi = {
     return response.data;
   },
 
+  updateCategory: async (
+    categoryId: number,
+    data: any,
+  ): Promise<ServiceCategory> => {
+    const response = await api.put(
+      `/api/services/categories/${categoryId}`,
+      data,
+    );
+    return response.data;
+  },
+
+  deleteCategory: async (categoryId: number): Promise<void> => {
+    await api.delete(`/api/services/categories/${categoryId}`);
+  },
+
   create: async (storeId: number, data: any): Promise<Service> => {
     const response = await api.post(`/api/services/store/${storeId}`, data);
     return response.data;

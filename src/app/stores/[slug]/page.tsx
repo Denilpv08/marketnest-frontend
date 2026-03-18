@@ -1,4 +1,4 @@
-import StoreSlug from "@/components/stores/StoreSlug";
+import StoreSlug from "@/components/store/StoreSlug";
 
 export default function StorePage() {
   return <StoreSlug />;

@@ -207,3 +207,28 @@ export interface DashboardSuperadmin {
   total_revenue: number;
   total_orders: number;
 }
+
+export interface ProductForm {
+  name: string;
+  description: string;
+  price: string;
+  stock: string;
+  image_url: string;
+  is_active: boolean;
+}
+
+export interface ServiceForm {
+  name: string;
+  description: string;
+  price: string;
+  duration: string;
+  duration_unit: string;
+  category_id: string;
+  image_url: string;
+  is_active: boolean;
+}
+
+export interface CategoryForm {
+  name: string;
+  description: string;
+}
