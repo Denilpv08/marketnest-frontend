@@ -1,4 +1,4 @@
-import Stores from "@/components/stores/Stores";
+import Stores from "@/components/store/Stores";
 
 export default function StoresPage() {
   return <Stores />;
