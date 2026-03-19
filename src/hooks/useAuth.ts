@@ -36,8 +36,18 @@ export const useAuth = () => {
   ) => {
     try {
       const data = await authApi.register({ name, email, password, role });
+
+      // Si el admin queda pendiente no iniciamos sesión
+      if (data.user.status === "pending") {
+        toast.success(
+          "Solicitud enviada. Espera la aprobación del administrador para iniciar sesión.",
+        );
+        router.push("/auth/login");
+        return;
+      }
+
       setAuth(data.user, data.access_token);
-      toast.success("Cuenta creada exitosamente");
+      toast.success(`Bienvenido ${data.user.name}!`);
       router.push("/");
     } catch (error: any) {
       const message = error.response?.data?.detail || "Error al registrarse";

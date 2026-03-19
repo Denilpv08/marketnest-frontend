@@ -3,10 +3,21 @@ import { useState } from "react";
 import Link from "next/link";
 import { useAuth } from "@/hooks/useAuth";
 import { MdStorefront } from "react-icons/md";
-import { FiMail, FiLock, FiUser, FiEye, FiEyeOff } from "react-icons/fi";
+import {
+  FiMail,
+  FiLock,
+  FiUser,
+  FiEye,
+  FiEyeOff,
+  FiShoppingBag,
+} from "react-icons/fi";
+import { BsShop } from "react-icons/bs";
+
+type RegisterMode = "customer" | "admin";
 
 const Register = () => {
   const { register } = useAuth();
+  const [mode, setMode] = useState<RegisterMode>("customer");
   const [formData, setFormData] = useState({
     name: "",
     last_name: "",
@@ -35,7 +46,7 @@ const Register = () => {
     }
     setLoading(true);
     try {
-      await register(formData.name, formData.email, formData.password);
+      await register(formData.name, formData.email, formData.password, mode);
     } finally {
       setLoading(false);
     }
@@ -45,13 +56,63 @@ const Register = () => {
     <div className="min-h-screen bg-linear-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-xl w-full max-w-md p-8">
         {/* Logo */}
-        <div className="flex flex-col items-center mb-8">
+        <div className="flex flex-col items-center mb-6">
           <div className="bg-blue-600 p-3 rounded-xl mb-3">
             <MdStorefront className="text-white text-3xl" />
           </div>
           <h1 className="text-2xl font-bold text-gray-900">MarketNest</h1>
           <p className="text-gray-500 text-sm mt-1">Crea tu cuenta gratis</p>
         </div>
+
+        {/* Selector de tipo de cuenta */}
+        <div className="grid grid-cols-2 gap-3 mb-6">
+          <button
+            type="button"
+            onClick={() => setMode("customer")}
+            className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all ${
+              mode === "customer"
+                ? "border-blue-600 bg-blue-50 text-blue-600"
+                : "border-gray-200 text-gray-500 hover:border-gray-300"
+            }`}
+          >
+            <FiShoppingBag className="text-2xl" />
+            <div>
+              <p className="font-semibold text-sm">Soy comprador</p>
+              <p className="text-xs text-gray-400 mt-0.5">
+                Quiero comprar y agendar citas
+              </p>
+            </div>
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setMode("admin")}
+            className={`flex flex-col items-center gap-2 p-4 rounded-xl border-2 transition-all ${
+              mode === "admin"
+                ? "border-blue-600 bg-blue-50 text-blue-600"
+                : "border-gray-200 text-gray-500 hover:border-gray-300"
+            }`}
+          >
+            <BsShop className="text-2xl" />
+            <div>
+              <p className="font-semibold text-sm">Tengo un negocio</p>
+              <p className="text-xs text-gray-400 mt-0.5">
+                Quiero crear mi tienda
+              </p>
+            </div>
+          </button>
+        </div>
+
+        {/* Info para admins */}
+        {mode === "admin" && (
+          <div className="bg-yellow-50 border border-yellow-200 rounded-lg px-4 py-3 mb-5 text-sm text-yellow-700">
+            <p className="font-medium mb-1">📋 Proceso de aprobación</p>
+            <p>
+              Tu cuenta quedará <strong>pendiente de aprobación</strong>. Una
+              vez aprobada podrás crear y gestionar tu tienda.
+            </p>
+          </div>
+        )}
 
         {/* Error */}
         {error && (
@@ -171,8 +232,10 @@ const Register = () => {
                 <div className="h-4 w-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                 Creando cuenta...
               </>
+            ) : mode === "customer" ? (
+              "Crear cuenta de comprador"
             ) : (
-              "Crear cuenta"
+              "Solicitar cuenta de negocio"
             )}
           </button>
         </form>
