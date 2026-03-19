@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import AdminLayout from "@/components/layout/AdminLayout";
+import AdminLayout from "@/components/layout/admin/AdminLayout";
 import { storesApi, appointmentsApi } from "@/lib/api";
 import { Appointment, AppointmentStatus } from "@/types";
 import LoadingSpinner from "@/components/ui/LoadingSpinner";

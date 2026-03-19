@@ -1,4 +1,4 @@
-import AdminLayout from "@/components/layout/AdminLayout";
+import AdminLayout from "@/components/layout/admin/AdminLayout";
 import Card from "@/components/ui/Card";
 import { storesApi } from "@/lib/api";
 import toast from "react-hot-toast";

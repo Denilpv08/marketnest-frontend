@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import AdminLayout from "@/components/layout/AdminLayout";
+import AdminLayout from "@/components/layout/admin/AdminLayout";
 import { dashboardApi, storesApi } from "@/lib/api";
 import { DashboardStore, Store } from "@/types";
 import { useAuthStore } from "@/store/authStore";
