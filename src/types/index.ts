@@ -63,6 +63,7 @@ export interface User {
   last_name: string | null;
   email: string;
   role: UserRole;
+  status: UserStatus;
   identity_type: IdentityType | null;
   identity_number: string | null;
   city: string | null;
@@ -231,4 +232,10 @@ export interface ServiceForm {
 export interface CategoryForm {
   name: string;
   description: string;
+}
+
+export enum UserStatus {
+  active = "active",
+  pending = "pending",
+  suspended = "suspended",
 }
